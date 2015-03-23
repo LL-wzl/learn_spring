@@ -12,7 +12,7 @@ public class AppTest {
 		HelloWord helloWord = (HelloWord) applicationContext.getBean("helloWord");
 		
 		System.out.println(helloWord.getName());
-		
+		   
 	}
 
 }
