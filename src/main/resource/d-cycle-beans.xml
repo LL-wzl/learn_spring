@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="car" class="com.ll.learn.spring.d_cycle.Car">
+		<property name="name" value="#{'Audi'}"/>
+		<property name="price" value="#{300 + 1}"/>
+		<property name="speel" value="#{11}"/>
+	</bean>
+
+	<bean id="person" class="com.ll.learn.spring.d_cycle.Person" init-method="init" destroy-method="myDestory">
+		<property name="id" value="1"/>
+		<property name="name" value="#{car.name + '_a6'}"/>
+		<property name="car" value="#{car}"/>
+	</bean>
+
+	<!-- bean的后置处理器  -->
+	<bean class="com.ll.learn.spring.d_cycle.MyBeanPostProcess"></bean>
+
+</beans>
