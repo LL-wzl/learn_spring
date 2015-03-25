@@ -4,7 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="helloWord" class="com.ll.learn.spring.a_helloword.HelloWord">
+		<constructor-arg>
+			<value>constructor-hello-word</value>
+		</constructor-arg>
 		<property name="name" value="hello word!"></property>
 	</bean>
 
+	
 </beans>
