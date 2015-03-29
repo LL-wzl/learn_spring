@@ -8,11 +8,26 @@
 
 	<context:property-placeholder location="classpath:db.properties"/>
 
-	<bean id="dataSource" class=" com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClass"  value="${dirver_class}"/>
-		<property name="jdbcUrl" value="${jdbc_url"/>
+	<context:component-scan base-package="com.ll.learn.spring.c_properties"></context:component-scan>
+
+	<!-- 配置C3p0连接池 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass"  value="${driver_class}"/>
+		<property name="jdbcUrl" value="${jdbc_url}"/>
 		<property name="user" value="${user}"/>
 		<property name="password" value="${password}"/>
+		<property name="initialPoolSize" value="5"></property>
+		<property name="maxPoolSize" value="20"></property>
+	</bean>
+
+	<!-- 配置spring的jdbcTemplate -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="dataSource">
+		</constructor-arg>
 	</bean>
 
 </beans>
