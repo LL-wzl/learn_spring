@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<!-- 配置bean -->
+	<bean id="userDao" class="com.ll.learn.spring.h_aop_xml.UserDaoImpl"></bean>
+
+	<!-- aspecjt切面配置 -->
+	<bean id="loggingAspecjt" class="com.ll.learn.spring.h_aop_xml.LoggingAspecjt"></bean>
+	<bean id="validateAspecjt" class="com.ll.learn.spring.h_aop_xml.ValidateAspecjt"></bean>
+
+	<!-- APO 配置 -->
+	<aop:config>
+		<!-- 切点 -->
+		<aop:pointcut expression="execution(* com.ll.learn.spring.h_aop_xml.UserDao.*(..))" id="pc"/>
+		<!-- 切面 -->
+		<aop:aspect id="la" ref="loggingAspecjt" order="1">
+			<!-- 通知类型 -->
+			<aop:before method="beforeMethod" pointcut-ref="pc"/>
+			<aop:after method="afterMethod" pointcut-ref="pc"/>
+			<aop:after-returning method="afterReturning" pointcut-ref="pc" returning="object"/>
+			<aop:after-throwing method="afterThrowing" pointcut-ref="pc" throwing="ex"/>
+			<aop:around method="around" pointcut-ref="pc"/>
+		</aop:aspect>
+		<aop:aspect id="va" ref="validateAspecjt" order="2">
+			<aop:before method="beforeMethod" pointcut-ref="pc"/>
+		</aop:aspect>
+	</aop:config>
+	
+</beans>
