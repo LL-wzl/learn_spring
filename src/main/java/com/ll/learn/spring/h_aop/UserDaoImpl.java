@@ -1,13 +1,14 @@
 package com.ll.learn.spring.h_aop;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * 
  * @author Administrator
  *
  */
-@Component
+@Repository
 public class UserDaoImpl implements UserDao {
 
 	public void add(String userId, String userName) {

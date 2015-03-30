@@ -12,6 +12,9 @@ public class AppTest {
 		
 		UserDao userDao = (UserDao) ctx.getBean(UserDao.class);
 		
+		UserService userService = ctx.getBean(UserService.class);
+		userService.getDao();
+		
 		userDao.add("id", "name");
 
 //		userDao.add("id", null);
